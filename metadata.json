@@ -1,0 +1,6 @@
+{
+  "name": "Wajahat - Wedding & Valima Invitation",
+  "description": "Wedding Ceremony (Barat) and Valima Reception invitation for Wajahat, son of Muhammad Zakir, hosted by Mrs. Muhammad Zakir in Karachi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

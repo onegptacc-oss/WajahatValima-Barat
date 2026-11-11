@@ -1,0 +1,256 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Cormorant Garamond', Garamond, Georgia, serif;
+    --font-script: 'Pinyon Script', 'Great Vibes', cursive;
+    --font-caps: 'Cinzel', 'Times New Roman', serif;
+    --font-arabic: 'Amiri', 'Noto Naskh Arabic', serif;
+  }
+
+  body {
+    background-color: #120205;
+    color: #261619;
+    font-family: var(--font-serif);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+.font-serif {
+  font-family: 'Cormorant Garamond', Garamond, Georgia, serif;
+  font-variant-numeric: lining-nums tabular-nums;
+  -moz-font-feature-settings: "lnum" 1;
+  -webkit-font-feature-settings: "lnum" 1;
+  font-feature-settings: "lnum" 1;
+}
+
+.font-script {
+  font-family: 'Pinyon Script', 'Great Vibes', cursive;
+}
+
+.font-caps {
+  font-family: 'Cinzel', 'Times New Roman', serif;
+  letter-spacing: 0.18em;
+}
+
+.font-arabic {
+  font-family: 'Amiri', 'Noto Naskh Arabic', 'Scheherazade New', serif;
+}
+
+.tracking-caps {
+  letter-spacing: 0.22em;
+}
+
+/* Scratch heart clip */
+.scratch-heart {
+  clip-path: url(#heart-clip);
+  -webkit-clip-path: url(#heart-clip);
+}
+
+/* Animations */
+@keyframes shimmer-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  50%, 100% {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes float-soft {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(8deg);
+  }
+}
+
+@keyframes seal-crack {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.15) rotate(-3deg);
+  }
+  100% {
+    transform: scale(0.9) opacity(0);
+  }
+}
+
+@keyframes bounce-arrow {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-bounce-arrow {
+  animation: bounce-arrow 2s infinite;
+}
+
+.animate-seal-crack {
+  animation: seal-crack 0.8s forwards;
+}
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Quran Verse animations */
+.verse-words {
+  opacity: 0.2;
+  transition: opacity 1.2s ease-out;
+}
+
+.verse-words.is-visible {
+  opacity: 1;
+}
+
+.verse-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem auto;
+  max-width: 14rem;
+  opacity: 0;
+  transform: scaleX(0.7);
+  transition: all 1s ease-out 0.3s;
+}
+
+.verse-divider.is-visible {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.verse-divider span {
+  height: 1px;
+  flex: 1;
+}
+
+.verse-translation {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 1s ease-out 0.5s;
+}
+
+.verse-translation.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.verse-reference {
+  opacity: 0;
+  transition: opacity 1s ease-out 0.8s;
+}
+
+.verse-reference.is-visible {
+  opacity: 1;
+}
+
+.quran-ornament {
+  display: flex;
+  justify-content: center;
+  font-size: 10px;
+}
+.quran-ornament-top {
+  margin-bottom: 1rem;
+}
+.quran-ornament-bottom {
+  margin-top: 1.5rem;
+}
+
+/* Rose bloom celebration burst */
+.rose-bloom-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.rose-bloom {
+  position: absolute;
+  top: var(--oy, 50%);
+  left: var(--ox, 50%);
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  animation: rose-burst-fly 2.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes rose-burst-fly {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
+  }
+  30% {
+    opacity: 0.95;
+    transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, -80px))) scale(1) rotate(var(--rot, 90deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dx, 0px) * 1.5), calc(-50% + var(--dy, 160px) + 200px)) scale(0.6) rotate(calc(var(--rot, 90deg) * 2.5));
+  }
+}
+
+/* Staggered random trajectories for 40 rose petals */
+.rose-1  { --dx: -120px; --dy: -180px; --rot: 75deg;  animation-delay: 0ms; }
+.rose-2  { --dx: 130px;  --dy: -160px; --rot: -80deg; animation-delay: 40ms; }
+.rose-3  { --dx: -180px; --dy: -100px; --rot: 140deg; animation-delay: 60ms; }
+.rose-4  { --dx: 190px;  --dy: -90px;  --rot: -120deg;animation-delay: 30ms; }
+.rose-5  { --dx: -80px;  --dy: -240px; --rot: 45deg;  animation-delay: 80ms; }
+.rose-6  { --dx: 90px;   --dy: -230px; --rot: -65deg; animation-delay: 50ms; }
+.rose-7  { --dx: -220px; --dy: -40px;  --rot: 190deg; animation-delay: 90ms; }
+.rose-8  { --dx: 210px;  --dy: -30px;  --rot: -170deg;animation-delay: 70ms; }
+.rose-9  { --dx: -140px; --dy: -210px; --rot: 95deg;  animation-delay: 110ms; }
+.rose-10 { --dx: 150px;  --dy: -200px; --rot: -110deg;animation-delay: 100ms; }
+.rose-11 { --dx: -40px;  --dy: -260px; --rot: 30deg;  animation-delay: 130ms; }
+.rose-12 { --dx: 50px;   --dy: -250px; --rot: -40deg; animation-delay: 120ms; }
+.rose-13 { --dx: -240px; --dy: 30px;   --rot: 210deg; animation-delay: 140ms; }
+.rose-14 { --dx: 230px;  --dy: 40px;   --rot: -200deg;animation-delay: 150ms; }
+.rose-15 { --dx: -100px; --dy: -140px; --rot: 60deg;  animation-delay: 170ms; }
+.rose-16 { --dx: 110px;  --dy: -130px; --rot: -70deg; animation-delay: 160ms; }
+.rose-17 { --dx: -160px; --dy: 80px;   --rot: 160deg; animation-delay: 190ms; }
+.rose-18 { --dx: 170px;  --dy: 90px;   --rot: -150deg;animation-delay: 180ms; }
+.rose-19 { --dx: 0px;    --dy: -270px; --rot: 10deg;  animation-delay: 200ms; }
+.rose-20 { --dx: -200px; --dy: -150px; --rot: 130deg; animation-delay: 220ms; }
+.rose-21 { --dx: 190px;  --dy: -140px; --rot: -135deg;animation-delay: 210ms; }
+.rose-22 { --dx: -70px;  --dy: -190px; --rot: 55deg;  animation-delay: 230ms; }
+.rose-23 { --dx: 80px;   --dy: -180px; --rot: -50deg; animation-delay: 240ms; }
+.rose-24 { --dx: -110px; --dy: 120px;  --rot: 175deg; animation-delay: 260ms; }
+.rose-25 { --dx: 120px;  --dy: 130px;  --rot: -165deg;animation-delay: 250ms; }
+.rose-26 { --dx: -250px; --dy: -70px;  --rot: 225deg; animation-delay: 280ms; }
+.rose-27 { --dx: 240px;  --dy: -60px;  --rot: -215deg;animation-delay: 270ms; }
+.rose-28 { --dx: -30px;  --dy: -220px; --rot: 25deg;  animation-delay: 290ms; }
+.rose-29 { --dx: 40px;   --dy: -210px; --rot: -35deg; animation-delay: 300ms; }
+.rose-30 { --dx: -170px; --dy: -50px;  --rot: 145deg; animation-delay: 310ms; }
+.rose-31 { --dx: 160px;  --dy: -40px;  --rot: -140deg;animation-delay: 320ms; }
+.rose-32 { --dx: -90px;  --dy: 60px;   --rot: 115deg; animation-delay: 340ms; }
+.rose-33 { --dx: 100px;  --dy: 70px;   --rot: -105deg;animation-delay: 330ms; }
+.rose-34 { --dx: -130px; --dy: -120px; --rot: 85deg;  animation-delay: 360ms; }
+.rose-35 { --dx: 140px;  --dy: -110px; --rot: -95deg; animation-delay: 350ms; }
+.rose-36 { --dx: -60px;  --dy: -160px; --rot: 40deg;  animation-delay: 370ms; }
+.rose-37 { --dx: 70px;   --dy: -150px; --rot: -45deg; animation-delay: 380ms; }
+.rose-38 { --dx: -210px; --dy: 10px;   --rot: 195deg; animation-delay: 390ms; }
+.rose-39 { --dx: 200px;  --dy: 20px;   --rot: -185deg;animation-delay: 400ms; }
+.rose-40 { --dx: 10px;   --dy: -280px; --rot: -15deg; animation-delay: 410ms; }
